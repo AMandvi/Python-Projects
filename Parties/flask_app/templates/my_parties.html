@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <div class="container">
+        <div class="d-flex justify-content-between">
+            <h1>{{logged_user.first_name}}'s Parties</h1>
+                <a href="/dashboard" class="btn btn-danger">Logout</a>
+        </div>
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>What</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>All Ages</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for one_party in logged_user.parties%}
+                <tr>
+                    <td>{{one_party.what}}</td>
+                    <td>{{one_party.location}}</td>
+                    <td>{{one_party.date}}</td>
+                    <td>{%if one_party.all_ages == 1%} True {%else%} False {%endif%}</td>
+                    <td>
+                        <a href="/parties/{{one_party.id}}/view">View</a>
+
+                        <a href="/parties/{{one_party.id}}/edit">Edit</a>
+                        <a href="/parties/{{one_party.id}}/delete">Cancel</a>
+                    
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+        <a href="/parties/new">Add A Party</a>
+    </div>
+</body>
+</html>
